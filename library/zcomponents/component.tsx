@@ -9,8 +9,8 @@ import { CompiledCircuit, ProofData } from "@noir-lang/types";
 import { useAccount, useConnect, useWalletClient } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 
-import { shortenEthAddress } from "../utils/helpers";
-import circuit from "../utils/noirstarter.json";
+import { shortenEthAddress } from "../zutils/helpers";
+import circuit from "../zutils/noirstarter.json";
 
 function useProver({ inputs, setLoading }: any) {}
 
