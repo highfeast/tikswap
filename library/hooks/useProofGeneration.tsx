@@ -2,7 +2,7 @@ import { BarretenbergBackend } from "@noir-lang/backend_barretenberg";
 import { Noir } from "@noir-lang/noir_js";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { getCircuit } from "../utils/compile";
+import { getCircuit } from "../zutils/compile";
 
 export function useProofGeneration(inputs?: { [key: string]: string }) {
   const [proofData, setProofData] = useState<any | undefined>();
