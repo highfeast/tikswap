@@ -1,6 +1,6 @@
 "use client";
 
-import { config } from "../utils/wagmi";
+import { config } from "../zutils/wagmi";
 import { ChakraProvider } from "@chakra-ui/react";
 import * as React from "react";
 import { WagmiConfig } from "wagmi";
