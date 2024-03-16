@@ -33,6 +33,7 @@
     "providers\n": "link:@metamask/providers\n",
     "react": "^18",
     "react-dom": "^18",
+    "react-resizable-panels": "^2.0.13",
     "react-toastify": "^9.1.1",
     "typechain": "^8.1.0",
     "tailwind-merge": "^2.2.1",
