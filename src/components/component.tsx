@@ -5,7 +5,7 @@ import { Box, Button, Heading, useToast, List, ListItem, Text, VStack, } from '@
 import React from 'react';
 
 import { fromHex, hashMessage, recoverPublicKey } from 'viem';
-
+import { cpus } from 'os';
 
 import { BarretenbergBackend } from '@noir-lang/backend_barretenberg';
 import { Noir } from '@noir-lang/noir_js';
@@ -16,6 +16,7 @@ import { getCircuit } from '../utils/compile';
 
 import circuit from "@/utils/noirstarter.json"
 import { shortenEthAddress } from '@/utils/helpers';
+import { Barretenberg, Fr } from '@aztec/bb.js';
 
 function useProver({ inputs, setLoading }: any) {
 
@@ -51,7 +52,7 @@ function Component() {
             toast({
                 title: status === "l" ? 'Sit tight, Generating Proof!' : status === 'r' ? "Verifying proof" : status === 's' ? 'Verified' : 'loading',
                 status: status === "s" ? 'success' : status === 'e' ? 'error' : 'info',
-                duration: status !== 's' ? 100000 : 0,
+                duration: status !== 's' ? 100000 : 4000,
                 isClosable: true,
             });
         }
@@ -64,7 +65,6 @@ function Component() {
             setStatus('r');
             try {
                 await noir.verifyFinalProof(proof);
-                console.log("success")
                 setStatus('s');
             } catch (error) {
                 setStatus('e');
@@ -113,11 +113,20 @@ function Component() {
 
         const pubKey = await recoverPublicKey({ hash: hashedMessage, signature: signature as `0x${string}` });
 
+        const bb = await Barretenberg.new(cpus().length);
+        await bb.pedersenInit();
+
+        const signatureBuffer = fromHex(signature as `0x${string}`, "bytes").slice(0, 64)
+        const frArray: Fr[] = Array.from(signatureBuffer).map(byte => new Fr(BigInt(byte)));
+
+        const nullifier = await bb.pedersenHashMultiple(frArray);
+
         const inputs = {
             pub_key: [...fromHex(pubKey, "bytes").slice(1)],
             signature: [...fromHex(signature as `0x${string}`, "bytes").slice(0, 64)],
             hashed_message: [...fromHex(hashedMessage, "bytes")],
-            claimer_pub: acc
+            claimer_pub: acc,
+            nullifier: nullifier.toString()
         };
         console.log("claimes_key", inputs);
         setInputs(inputs)

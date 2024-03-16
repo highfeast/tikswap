@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@aztec/bb.js": "0.11.0",
+    "@biconomy/bundler": "^4.1.1",
     "@chakra-ui/next-js": "^2.2.0",
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.4",
@@ -25,7 +26,9 @@
     "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
     "@nomicfoundation/hardhat-toolbox-viem": "1.0.0",
     "@nomicfoundation/hardhat-viem": "1.0.0",
+    "@openzeppelin/contracts": "^5.0.2",
     "bb.js@^0.11.0": "link:aztec/bb.js@^0.11.0",
+    "contracts": "link:@openzeppelin/contracts",
     "dotenv": "^16.0.3",
     "framer-motion": "^11.0.14",
     "hardhat": "^2.22.1",
@@ -35,7 +38,7 @@
     "react-dom": "^18",
     "react-toastify": "^9.1.1",
     "typechain": "^8.1.0",
-    "viem": "1.16.6"
+    "viem": "~0.3.50"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.2",
@@ -47,7 +50,7 @@
     "@types/react-dom": "^18",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.0.1",
-    "chai": "^4.2.0",
+    "chai": "^4.4.1",
     "postcss": "^8",
     "solidity-coverage": "^0.8.5",
     "tailwindcss": "^3.3.0",
