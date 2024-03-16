@@ -30,7 +30,11 @@
         },
         "visibility": "public"
       },
-      { "name": "claimer_pub", "type": { "kind": "field" }, "visibility": "public" }
+      {
+        "name": "claimer_pub",
+        "type": { "kind": "field" },
+        "visibility": "public"
+      }
     ],
     "param_witnesses": {
       "claimer_pub": [{ "start": 160, "end": 161 }],
