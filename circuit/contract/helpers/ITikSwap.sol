@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import './IERC20.sol';
+import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 
 interface ITikSwap {
     function submitIntent() external;
@@ -18,4 +18,5 @@ interface ITikSwap {
     ) external;
 
     function purchaseTicket(uint256 _eventId, bytes32 _nullifier, uint256 _ticketId) external;
+
 }
