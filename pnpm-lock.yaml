@@ -8,6 +8,9 @@ dependencies:
   '@aztec/bb.js':
     specifier: 0.11.0
     version: 0.11.0
+  '@biconomy/bundler':
+    specifier: ^4.1.1
+    version: 4.1.1(typescript@5.4.2)
   '@chakra-ui/next-js':
     specifier: ^2.2.0
     version: 2.2.0(@chakra-ui/react@2.8.2)(@emotion/react@11.11.4)(next@14.1.3)(react@18.2.0)
@@ -106,6 +109,9 @@ devDependencies:
 
 packages:
 
+  /@adraffy/ens-normalize@1.9.0:
+    resolution: {integrity: sha512-iowxq3U30sghZotgl4s/oJRci6WPBfNO5YYgk2cIOMCHr3LeGPcsZjCEr+33Q4N+oV3OABDAtA+pyvWjbvBifQ==}
+
   /@adraffy/ens-normalize@1.9.4:
     resolution: {integrity: sha512-UK0bHA7hh9cR39V+4gl2/NnBBjoXIxkuWAPCaY4X7fbH4L/azIi7ilWOCjMUYfpJgraLUAqkRi2BqrjME8Rynw==}
     dev: false
@@ -187,6 +193,32 @@ packages:
       '@babel/helper-string-parser': 7.23.4
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
+    dev: false
+
+  /@biconomy/bundler@4.1.1(typescript@5.4.2):
+    resolution: {integrity: sha512-bji/wo5x3V3QpSmvagDClHmYg7L9vUU+5jM1oE7MDgTI6F1ZQqHHEnUj3wBd9hyojLbMqDMmqilow6dFbZMcKw==}
+    dependencies:
+      '@alchemy/aa-core': 3.5.1(typescript@5.4.2)(viem@2.8.10)
+      '@biconomy/common': 4.1.1(typescript@5.4.2)
+      viem: 2.8.10(typescript@5.4.2)
+    transitivePeerDependencies:
+      - bufferutil
+      - typescript
+      - utf-8-validate
+      - zod
+    dev: false
+
+  /@biconomy/common@4.1.1(typescript@5.4.2):
+    resolution: {integrity: sha512-w0SL4Rc2UWa0+sRzRo+kepFSB1ayop3DbGwyPQ/Tb6LQZ0UCrkIKMelJ9E8FuU2X1jQu7BtjrtS8orNZL14TfA==}
+    dependencies:
+      '@alchemy/aa-core': 3.5.1(typescript@5.4.2)(viem@2.8.10)
+      '@ethersproject/abstract-signer': 5.7.0
+      viem: 2.8.10(typescript@5.4.2)
+    transitivePeerDependencies:
+      - bufferutil
+      - typescript
+      - utf-8-validate
+      - zod
     dev: false
 
   /@chakra-ui/accordion@2.3.1(@chakra-ui/system@2.6.2)(framer-motion@11.0.14)(react@18.2.0):
@@ -1650,6 +1682,11 @@ packages:
     dev: false
     optional: true
 
+  /@noble/curves@1.0.0:
+    resolution: {integrity: sha512-2upgEu0iLiDVDZkNLeFV2+ht0BAVgQnEmCk6JsOch9Rp8xfkMCbvbAZlA2pBHQc73dbl+vFOXfqkf4uemdn0bw==}
+    dependencies:
+      '@noble/hashes': 1.3.0
+
   /@noble/curves@1.2.0:
     resolution: {integrity: sha512-oYclrNgRaM9SsBUBVbb8M6DTV7ZHRTKugureoYEncY5c65HOmRzvSiTE3y5CYaPYJA/GVkrhXEoF0M3Ya9PMnw==}
     dependencies:
@@ -1947,7 +1984,7 @@ packages:
     resolution: {integrity: sha512-N1ZhksgwD3OBlwTv3R6KFEcPojl/W4ElJOeCZdi+vuI5QmTFwLq3OFf2zd2ROpKvxFdgZ6hUpb0dx9bVNEwYCA==}
     dependencies:
       '@noble/curves': 1.2.0
-      '@noble/hashes': 1.3.2
+      '@noble/hashes': 1.3.3
       '@scure/base': 1.1.5
     dev: false
 
@@ -2238,10 +2275,10 @@ packages:
       '@walletconnect/legacy-provider': 2.0.0
       '@walletconnect/modal': 2.6.2(@types/react@18.2.66)(react@18.2.0)
       '@walletconnect/utils': 2.11.0
-      abitype: 0.8.7(typescript@5.4.2)
+      abitype: 0.8.7(typescript@5.4.2)(zod@3.22.4)
       eventemitter3: 4.0.7
       typescript: 5.4.2
-      viem: 1.16.6(typescript@5.4.2)
+      viem: 0.3.50(typescript@5.4.2)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -2266,7 +2303,7 @@ packages:
       - zod
     dev: false
 
-  /@wagmi/core@1.4.13(@types/react@18.2.66)(react@18.2.0)(typescript@5.4.2)(viem@1.16.6):
+  /@wagmi/core@1.4.13(@types/react@18.2.66)(react@18.2.0)(typescript@5.4.2)(viem@0.3.50):
     resolution: {integrity: sha512-ytMCvXbBOgfDu9Qw67279wq/jNEe7EZLjLyekX7ROnvHRADqFr3lwZI6ih41UmtRZAmXAx8Ghyuqy154EjB5mQ==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -2275,11 +2312,11 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@wagmi/connectors': 3.1.11(@types/react@18.2.66)(react@18.2.0)(typescript@5.4.2)(viem@1.16.6)
-      abitype: 0.8.7(typescript@5.4.2)
+      '@wagmi/connectors': 3.1.11(@types/react@18.2.66)(react@18.2.0)(typescript@5.4.2)(viem@0.3.50)
+      abitype: 0.8.7(typescript@5.4.2)(zod@3.22.4)
       eventemitter3: 4.0.7
       typescript: 5.4.2
-      viem: 1.16.6(typescript@5.4.2)
+      viem: 0.3.50(typescript@5.4.2)
       zustand: 4.5.2(@types/react@18.2.66)(react@18.2.0)
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -5362,7 +5399,7 @@ packages:
       - zod
     dev: false
 
-  /wagmi@1.4.13(@types/react@18.2.66)(react-dom@18.2.0)(react@18.2.0)(typescript@5.4.2)(viem@1.16.6):
+  /wagmi@1.4.13(@types/react@18.2.66)(react-dom@18.2.0)(react@18.2.0)(typescript@5.4.2)(viem@0.3.50):
     resolution: {integrity: sha512-AScVYFjqNt1wMgL99Bob7MLdhoTZ3XKiOZL5HVBdy4W1sh7QodA3gQ8IsmTuUrQ7oQaTxjiXEhwg7sWNrPBvJA==}
     peerDependencies:
       react: '>=17.0.0'
@@ -5375,12 +5412,12 @@ packages:
       '@tanstack/query-sync-storage-persister': 4.36.1
       '@tanstack/react-query': 4.36.1(react-dom@18.2.0)(react@18.2.0)
       '@tanstack/react-query-persist-client': 4.36.1(@tanstack/react-query@4.36.1)
-      '@wagmi/core': 1.4.13(@types/react@18.2.66)(react@18.2.0)(typescript@5.4.2)(viem@1.16.6)
-      abitype: 0.8.7(typescript@5.4.2)
+      '@wagmi/core': 1.4.13(@types/react@18.2.66)(react@18.2.0)(typescript@5.4.2)(viem@0.3.50)
+      abitype: 0.8.7(typescript@5.4.2)(zod@3.22.4)
       react: 18.2.0
       typescript: 5.4.2
       use-sync-external-store: 1.2.0(react@18.2.0)
-      viem: 1.16.6(typescript@5.4.2)
+      viem: 0.3.50(typescript@5.4.2)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -5471,12 +5508,12 @@ packages:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
     dev: false
 
-  /ws@7.5.9:
-    resolution: {integrity: sha512-F+P9Jil7UiSKSkppIiD94dN07AwvFixvLIj1Og1Rl9GGMuNipJnV9JzjD6XuqmAeiswGvUmNLjr5cFuXwNS77Q==}
-    engines: {node: '>=8.3.0'}
+  /ws@8.12.0:
+    resolution: {integrity: sha512-kU62emKIdKVeEIOIKVegvqpXMSTAMLJozpHZaJNDYqBjzlSYXQGviYwN1osDLJ9av68qHd4a2oSjd7yD4pacig==}
+    engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
-      utf-8-validate: ^5.0.2
+      utf-8-validate: '>=5.0.2'
     peerDependenciesMeta:
       bufferutil:
         optional: true

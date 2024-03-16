@@ -4,19 +4,19 @@ use dep::ecrecover;
 global DEPTH = 12;
 
 fn main(
-  pub_key: [u8; 64],
-  signature: [u8; 64],
-  hashed_message: pub [u8; 32],
-  claimer_pub: pub Field
-) -> pub Field {
+    pub_key: [u8; 64],
+    signature: [u8; 64],
+    hashed_message: pub [u8; 32],
+    nullifier: pub Field,
+    claimer_pub: pub Field
+) {
     let key = ecrecover::secp256k1::PubKey::from_unified(pub_key);
     let address = ecrecover::ecrecover(key.pub_x, key.pub_y, signature, hashed_message);
     let signature_as_fields = signature.map(|x : u8| x as Field);
-    let nullifier = std::hash::pedersen_hash(signature_as_fields); 
-    assert(address == claimer_pub );
-    nullifier
+    let calculatedNullifier = std::hash::pedersen_hash(signature_as_fields);
+    assert(address == claimer_pub);
+    assert(calculatedNullifier == nullifier);
 }
-
 
 // #[test]
 // fn test_main() {
@@ -44,5 +44,6 @@ fn main(
 //     ];
 
 //     let claimer = 0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc;
-//     main(pub_key, signature, hashed_message, claimer);
+//     let nullifier = 0x24607bdb5f755cb96c74f4fd30ae8595cfca37b9677124f65bb811c1583663ea;
+//     main(pub_key, signature, hashed_message, nullifier, claimer);
 // }
