@@ -1,6 +1,7 @@
 "use client";
 import Button from "@/library/components/atoms/Button";
 import Card from "@/library/components/molecules/Card";
+import AvatarButton from "@/library/components/atoms/AvatarButton";
 import { useRouter } from "next/navigation";
 
 const page = () => {
@@ -14,12 +15,12 @@ const page = () => {
         </p>
         <Card className="flex-1 justify-between rounded-3xl">
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            <div className="h-[100px] w-[100px] bg-gray-200 rounded-lg"></div>
-            <div className="h-[100px] w-[100px] bg-gray-200 rounded-lg"></div>
-            <div className="h-[100px] w-[100px] bg-gray-200 rounded-lg"></div>
-            <div className="h-[100px] w-[100px] bg-gray-200 rounded-lg"></div>
-            <div className="h-[100px] w-[100px] bg-gray-200 rounded-lg"></div>
-            <div className="h-[100px] w-[100px] bg-gray-200 rounded-lg"></div>
+            <AvatarButton src={""} handleClick={undefined} />
+            <AvatarButton src={""} handleClick={undefined} />
+            <AvatarButton src={""} handleClick={undefined} />
+            <AvatarButton src={""} handleClick={undefined} />
+            <AvatarButton src={""} handleClick={undefined} />
+            <AvatarButton src={""} handleClick={undefined} />
           </div>
 
           <div className="flex justify-between font-outfit">
