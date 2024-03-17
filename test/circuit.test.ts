@@ -1,15 +1,10 @@
-// import { CompiledCircuit } from "@noir-lang/types";
-
 const { cpus } = require('os');
 
 const { expect } = require('chai');
-// const hre  = require("hardhat");
 if (!hre) {
   const hre = require('hardhat');
 }
 const { Barretenberg, Fr } = require('@aztec/bb.js');
-
-// import { ethers } from 'ethers';
 
 const { WalletClient, pad, fromHex, hashMessage, http, recoverPublicKey, toHex } = require('viem');
 const { BarretenbergBackend } = require('@noir-lang/backend_barretenberg');
@@ -18,26 +13,6 @@ const circuit = require('../circuit/target/noirstarter.json');
 
 declare var PublicClient: any;
 
-class TicketSwap {
-  public address: `0x${string}` = '0x';
-
-  constructor(
-    private tokenAddress: string, //`0x${string}`,
-    private _verifierAddress: string,
-  ) {}
-
-  async deploy() {
-    const ticketSwap = await hre.viem.deployContract('TikSwap' as never, [
-      this._verifierAddress,
-      this.tokenAddress,
-    ]);
-    this.address = ticketSwap.address;
-  }
-
-  async contract() {
-    return await hre.viem.getContractAt('TikSwap', this.address);
-  }
-}
 describe('Setup', () => {
   let publicClient: any;
   let ticketSwap: TicketSwap;
@@ -52,7 +27,7 @@ describe('Setup', () => {
 
     hashedMessage = hashMessage(messageToHash, 'hex'); // keccak of "signthis"
 
-    ticketSwap = new TicketSwap('0x1d4343d35f0E0e14C14115876D01dEAa4792550b', verifier.address);
+    ticketSwap = new TicketSwap();
     await ticketSwap.deploy();
 
     console.log(`Ticket swap deployed to ${ticketSwap.address}`);
