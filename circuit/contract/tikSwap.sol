@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 import './helpers/ITikSwap.sol';
-import './noirstarter/plonk_vk.sol';
+// import './noirstarter/plonk_vk.sol';
 
 contract TikSwap {
     IERC20 public token;
     bytes32 public signThis;
-    UltraVerifier public verifier;
+    // UltraVerifier public verifier;
 
     struct EventInfo {
         string title;
@@ -39,7 +39,7 @@ contract TikSwap {
     // UltraVerifier _verifier
     {
         token = IERC20(address(0xbd64B25CB19254a9500105C85bFb460fd8d37655));
-        verifier = UltraVerifier(address(0)); //verification is ofchain
+        // verifier = UltraVerifier(address(0)); //verification is ofchain
     }
 
     modifier tokenGated() {
@@ -122,25 +122,25 @@ contract TikSwap {
         emit TicketPurchased(_eventId, _nullifier);
     }
 
-    function verifyProof(
-        bytes calldata proof,
-        bytes32 message,
-        address sender
-    ) external view returns (bool) {
-        return _verifyProof(proof, message, sender);
-    }
+    // function verifyProof(
+    //     bytes calldata proof,
+    //     bytes32 message,
+    //     address sender
+    // ) external view returns (bool) {
+    //     return _verifyProof(proof, message, sender);
+    // }
 
-    function _verifyProof(
-        bytes calldata proof,
-        bytes32 message,
-        address sender
-    ) internal view returns (bool) {
-        bytes32[] memory _publicInputs = new bytes32[](2);
-        _publicInputs[0] = message;
-        _publicInputs[1] = bytes32(uint256(uint160(sender)));
-        bool x = verifier.verify(proof, _publicInputs);
-        return x;
-    }
+    // function _verifyProof(
+    //     bytes calldata proof,
+    //     bytes32 message,
+    //     address sender
+    // ) internal view returns (bool) {
+    //     bytes32[] memory _publicInputs = new bytes32[](2);
+    //     _publicInputs[0] = message;
+    //     _publicInputs[1] = bytes32(uint256(uint160(sender)));
+    //     bool x = verifier.verify(proof, _publicInputs);
+    //     return x;
+    // }
 
     function random(uint256 _mod) internal view returns (uint256) {
         return uint256(keccak256(abi.encodePacked(block.timestamp, block.prevrandao))) % _mod;
