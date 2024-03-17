@@ -1,3 +1,4 @@
+"use client"
 import Component from "@/library/components/test/component";
 import { Connect } from "@/library/components/test/connect";
 import { Connected } from "@/library/components/test/connected";
