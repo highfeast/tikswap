@@ -42,7 +42,7 @@ dependencies:
     specifier: ^16.0.3
     version: 16.4.5
   hardhat:
-    specifier: ^2.22.1
+    specifier: ^2.18.1
     version: 2.22.1(ts-node@10.9.2)(typescript@5.4.2)
   hardhat-gas-reporter:
     specifier: ^1.0.8
@@ -65,7 +65,7 @@ devDependencies:
     specifier: ^1.0.0
     version: 1.1.1(hardhat@2.22.1)
   '@types/mocha':
-    specifier: ^10.0.1
+    specifier: ^10.0.6
     version: 10.0.6
   '@types/node':
     specifier: ^20
@@ -3328,6 +3328,7 @@ packages:
     dependencies:
       is-hex-prefixed: 1.0.0
       strip-hex-prefix: 1.0.0
+    bundledDependencies: false
 
   /eventemitter3@4.0.7:
     resolution: {integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==}
@@ -5024,7 +5025,7 @@ packages:
     resolution: {integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==}
     hasBin: true
     dependencies:
-      glob: 7.2.0
+      glob: 7.2.3
 
   /ripemd160@2.0.2:
     resolution: {integrity: sha512-ii4iagi25WusVoiC4B4lq7pbXfAp3D9v5CwfkY33vffw2+pkDjY1D8GaN7spsxvCSx8dkPqOZCEZyfxcmJG2IA==}
