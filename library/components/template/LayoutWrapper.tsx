@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import RootProvider from "@/library/providers/provider";
 import { cn } from "@/library/utils";
 import WrapAround from "./WrapAround";
+import { Toaster } from "../atoms/sonner";
 
 const inter = Inter({ subsets: ["latin"], preload: true });
 const outfit = Outfit({
@@ -39,9 +40,12 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
       <body className={cn(inter.className, outfit.variable, atyp.variable)}>
-        <RootProvider>
-          <WrapAround>{children}</WrapAround>
-        </RootProvider>
+        <main>
+          <RootProvider>
+            <WrapAround>{children}</WrapAround>
+          </RootProvider>
+        </main>
+        <Toaster />
       </body>
     </html>
   );
