@@ -17,25 +17,33 @@ contract TikSwap {
         uint256 price;
     }
 
-    mapping(uint256 => EventInfo) public eventInfo;
-    mapping(uint256 => mapping(bytes32 => bool)) public nullifiers;
-    mapping(uint256 => mapping(bytes32 => bool)) public intentNullifiers;
-    mapping(uint256 => bytes32[]) private eventIntents;
-    mapping(uint256 => uint256) private intentCount;
-
     uint256 public totalTicketsSold;
     uint256 public eventCounter;
 
+    mapping(uint256 => EventInfo) public eventInfo;
+    mapping(uint256 => mapping(bytes32 => bool)) public nullifiers;
+
+    mapping(uint256 => mapping(bytes32 => bool)) public intentNullifiers;
+    mapping(uint256 => bytes32[]) private eventIntents;
+    mapping(uint256 => uint256) public intentCount;
+
     event TicketPurchased(uint256 indexed eventId, bytes32 indexed nullifier);
+    event TicketSwapped(
+        uint256 indexed eventId,
+        bytes32 indexed oldNullifier,
+        bytes32 indexed newNullifier
+    );
     event NewIntent(uint256 indexed eventId, bytes32 indexed nullifier);
 
-    constructor(address tokenAddress, UltraVerifier _verifier) {
-        token = IERC20(tokenAddress);
-        verifier = _verifier;
+    constructor() // address tokenAddress,
+    // UltraVerifier _verifier
+    {
+        token = IERC20(address(0xbd64B25CB19254a9500105C85bFb460fd8d37655));
+        verifier = UltraVerifier(address(0)); //verification is ofchain
     }
 
     modifier tokenGated() {
-        require(token.balanceOf(msg.sender) >= 1, 'Token gating required');
+        require(token.balanceOf(msg.sender) >= 0, 'Insufficent fan Token');
         _;
     }
 
@@ -55,33 +63,22 @@ contract TikSwap {
         emit NewIntent(_eventId, _intentNullifier);
     }
 
-    function offerTicket(
-        bytes calldata proof,
-        uint256 _eventId,
-        bytes32 message,
-        bytes32 _intentNullifier,
-        bytes32 _sellersNullifier
-    ) external tokenGated {
+    //admin would offer a ticket if constraints are passed outside the contract
+    function offerTicket(uint256 _eventId, bytes32 _sellersNullifier) external tokenGated {
         EventInfo storage _event = eventInfo[_eventId];
         require(_event.eventId != 0, 'Event does not exist');
-
         require(
-            intentNullifiers[_eventId][_intentNullifier],
+            nullifiers[_eventId][_sellersNullifier],
             'Intent does not exist or nullifier has already been spent'
         );
-
         bytes32[] storage intents = eventIntents[_eventId];
-
         require(intents.length > 0, 'No intents available');
 
         uint256 randomIndex = random(intents.length);
         bytes32 selectedIntentNullifier = intents[randomIndex];
 
-        require(_verifyProof(proof, message, msg.sender), 'invalid proof of ownership');
-
         swapTicket(_eventId, selectedIntentNullifier, _sellersNullifier);
-        _event.ticketCount++;
-        emit TicketPurchased(_eventId, selectedIntentNullifier);
+        emit TicketSwapped(_eventId, _sellersNullifier, selectedIntentNullifier);
     }
 
     function swapTicket(
@@ -97,37 +94,42 @@ contract TikSwap {
     function addEvent(
         string memory _title,
         string memory _date,
-        uint256 _eventId,
         uint256 _maxTickets,
         uint256 _price
     ) external {
-        eventInfo[_eventId] = EventInfo(_title, _date, ++eventCounter, _maxTickets, 0, _price);
+        uint256 index = ++eventCounter;
+        eventInfo[index] = EventInfo(_title, _date, index, _maxTickets, 0, _price);
     }
 
-    function purchaseTicket(uint256 _eventId, bytes32 _nullifier, uint256 _ticketId) external {
+    //paymaster can send txn during purchase onbehalf of user
+    function purchaseTicket(uint256 _eventId, bytes32 _nullifier) external {
         EventInfo storage _event = eventInfo[_eventId];
         require(_event.eventId != 0, 'Event does not exist');
         require(_event.ticketCount < _event.maxTickets, 'sold out');
         require(!nullifiers[_eventId][_nullifier], 'nullifier has been spent for this event');
-        require(token.balanceOf(msg.sender) >= _event.price, 'Insufficient balance');
+
+        if (_event.price > 0) {
+            // // Transfer tokens from buyer to contract
+            require(
+                token.transferFrom(msg.sender, address(this), _event.price),
+                'Token transfer failed'
+            );
+        }
 
         nullifiers[_eventId][_nullifier] = true;
         _event.ticketCount++;
         totalTicketsSold++;
-
         emit TicketPurchased(_eventId, _nullifier);
     }
 
     function verifyProof(
-        bytes memory proof,
+        bytes calldata proof,
         bytes32 message,
         address sender
     ) external view returns (bool) {
-        bytes32[] memory _publicInputs = new bytes32[](2);
-        _publicInputs[0] = message;
-        _publicInputs[1] = bytes32(uint256(uint160(sender)));
-        return verifier.verify(proof, _publicInputs);
+        return _verifyProof(proof, message, sender);
     }
+
     function _verifyProof(
         bytes calldata proof,
         bytes32 message,

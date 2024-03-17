@@ -1,4 +1,3 @@
-//@ts-ignore
 const { cpus } = require('os');
 
 const { expect } = require('chai');
@@ -13,22 +12,6 @@ const { Noir } = require('@noir-lang/noir_js');
 const circuit = require('../circuit/target/noirstarter.json');
 
 declare var PublicClient: any;
-
-//@ts-ignore
-class TicketSwap {
-  public address: `0x${string}` = '0x';
-
-  constructor() {}
-
-  async deploy() {
-    const ticketSwap = await hre.viem.deployContract('TikSwap' as never, []);
-    this.address = ticketSwap.address;
-  }
-
-  async contract() {
-    return await hre.viem.getContractAt('TikSwap', this.address);
-  }
-}
 
 describe('Setup', () => {
   let publicClient: any;
@@ -88,7 +71,7 @@ describe('Setup', () => {
       };
     };
 
-    describe('Anonymous user', () => {
+    describe('Eligible user', () => {
       let proof: any;
 
       it('Generates a valid claim', async () => {
