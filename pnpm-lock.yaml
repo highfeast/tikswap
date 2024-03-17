@@ -8,6 +8,9 @@ dependencies:
   '@aztec/bb.js':
     specifier: 0.11.0
     version: 0.11.0
+  '@biconomy/account':
+    specifier: ^4.1.1
+    version: 4.1.1(typescript@5.4.2)
   '@biconomy/bundler':
     specifier: ^4.1.1
     version: 4.1.1(typescript@5.4.2)
@@ -53,15 +56,9 @@ dependencies:
   '@nomicfoundation/hardhat-viem':
     specifier: 1.0.0
     version: 1.0.0(hardhat@2.22.1)(typescript@5.4.2)(viem@1.16.0)
-  '@openzeppelin/contracts':
-    specifier: ^5.0.2
-    version: 5.0.2
   bb.js@^0.11.0:
     specifier: link:aztec/bb.js@^0.11.0
     version: link:aztec/bb.js@^0.11.0
-  contracts:
-    specifier: link:@openzeppelin/contracts
-    version: link:@openzeppelin/contracts
   dotenv:
     specifier: ^16.0.3
     version: 16.4.5
@@ -161,7 +158,6 @@ packages:
 
   /@adraffy/ens-normalize@1.10.1:
     resolution: {integrity: sha512-96Z2IP3mYmF1Xg2cDm8f1gWGf/HUVedQ3FMifV4kG/PQ4yEP51xDtRAEfhVNt5f/uzpNkZHwWQuUcu6D6K+Ekw==}
-    dev: true
 
   /@adraffy/ens-normalize@1.9.4:
     resolution: {integrity: sha512-UK0bHA7hh9cR39V+4gl2/NnBBjoXIxkuWAPCaY4X7fbH4L/azIi7ilWOCjMUYfpJgraLUAqkRi2BqrjME8Rynw==}
@@ -257,6 +253,22 @@ packages:
       to-fast-properties: 2.0.0
     dev: false
 
+  /@biconomy/account@4.1.1(typescript@5.4.2):
+    resolution: {integrity: sha512-qaT48L63Az+0K++GzU5jM9+UdMlZP+eOs+4SgftiNTSjJodhWTuoenmA/3zcTLzZ5inTZTUSjyxO5mR9uw79XA==}
+    dependencies:
+      '@alchemy/aa-core': 3.5.1(typescript@5.4.2)(viem@2.8.10)
+      '@biconomy/bundler': 4.1.1(typescript@5.4.2)
+      '@biconomy/common': 4.1.1(typescript@5.4.2)
+      '@biconomy/modules': 4.1.1(typescript@5.4.2)
+      '@biconomy/paymaster': 4.1.1(typescript@5.4.2)
+      viem: 2.8.10(typescript@5.4.2)
+    transitivePeerDependencies:
+      - bufferutil
+      - typescript
+      - utf-8-validate
+      - zod
+    dev: false
+
   /@biconomy/bundler@4.1.1(typescript@5.4.2):
     resolution: {integrity: sha512-bji/wo5x3V3QpSmvagDClHmYg7L9vUU+5jM1oE7MDgTI6F1ZQqHHEnUj3wBd9hyojLbMqDMmqilow6dFbZMcKw==}
     dependencies:
@@ -275,6 +287,34 @@ packages:
     dependencies:
       '@alchemy/aa-core': 3.5.1(typescript@5.4.2)(viem@2.8.10)
       '@ethersproject/abstract-signer': 5.7.0
+      viem: 2.8.10(typescript@5.4.2)
+    transitivePeerDependencies:
+      - bufferutil
+      - typescript
+      - utf-8-validate
+      - zod
+    dev: false
+
+  /@biconomy/modules@4.1.1(typescript@5.4.2):
+    resolution: {integrity: sha512-FGaQ+Ve/uZ4ztJu/MsvQzP0e33PaF8Mw9hIrhfwMS3pXWdVeOtpGySxna43ODfFinwo+jEIB9/vuM/1tAbUzMQ==}
+    dependencies:
+      '@alchemy/aa-core': 3.5.1(typescript@5.4.2)(viem@2.8.10)
+      '@biconomy/common': 4.1.1(typescript@5.4.2)
+      '@ethersproject/abi': 5.7.0
+      merkletreejs: 0.3.11
+      viem: 2.8.10(typescript@5.4.2)
+    transitivePeerDependencies:
+      - bufferutil
+      - typescript
+      - utf-8-validate
+      - zod
+    dev: false
+
+  /@biconomy/paymaster@4.1.1(typescript@5.4.2):
+    resolution: {integrity: sha512-Vj+a+jtNpHtykD3CerkaNnaS66rccTRYzI8rAl7jd2HuWZAzxxs8LDmsS0EZvu1crJMqXzLb6435hFn+qvn7kQ==}
+    dependencies:
+      '@alchemy/aa-core': 3.5.1(typescript@5.4.2)(viem@2.8.10)
+      '@biconomy/common': 4.1.1(typescript@5.4.2)
       viem: 2.8.10(typescript@5.4.2)
     transitivePeerDependencies:
       - bufferutil
@@ -2817,10 +2857,6 @@ packages:
       '@nomicfoundation/solidity-analyzer-win32-arm64-msvc': 0.1.1
       '@nomicfoundation/solidity-analyzer-win32-ia32-msvc': 0.1.1
       '@nomicfoundation/solidity-analyzer-win32-x64-msvc': 0.1.1
-
-  /@openzeppelin/contracts@5.0.2:
-    resolution: {integrity: sha512-ytPc6eLGcHHnapAZ9S+5qsdomhjo6QBHTDRRBFfTxXIpsicMhVPouPgmUPebZZZGX7vt9USA+Z+0M0dSVtSUEA==}
-    dev: false
 
   /@parcel/watcher-android-arm64@2.4.1:
     resolution: {integrity: sha512-LOi/WTbbh3aTn2RYddrO8pnapixAziFl6SMxHM69r3tvdSm94JtCenaKgk1GRg5FJ5wpMCpHeW+7yqPlvZv7kg==}
