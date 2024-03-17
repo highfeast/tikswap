@@ -19,4 +19,3 @@ interface ITikSwap {
 
     function purchaseTicket(uint256 _eventId, bytes32 _nullifier, uint256 _ticketId) external;
 }
- 
