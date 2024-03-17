@@ -12,7 +12,7 @@ dotenv.config();
 
 const config = {
   solidity: {
-    version: '0.8.20',
+    version: '0.8.19',
     settings: {
       optimizer: { enabled: true, runs: 5000 },
     },
@@ -26,6 +26,7 @@ const config = {
       url: 'http://127.0.0.1:8545',
     },
   },
+
   paths: {
     sources: './circuit/contract',
   },
