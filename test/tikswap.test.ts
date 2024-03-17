@@ -8,6 +8,7 @@ if (!toHex) {
   const { toHex } = require('viem');
 }
 
+//@ts-ignore
 class TicketSwap {
   public address: `0x${string}` = '0x';
 
